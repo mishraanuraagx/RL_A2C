@@ -16,3 +16,8 @@ In the a2c.py file, change value of learn:bool to True to learn and set it to Fa
 If learn is set to false, make sure the timestamp of the saved model should also be set in variable load_timestamp.
 
 then run the a2c.py implementation with the command:- python a2c.py
+
+
+## A2C training graph
+![image](https://github.com/mishraanuraagx/RL_A2C/assets/24863779/f27b278f-60d8-441e-a833-8c29f2c39490)
+
