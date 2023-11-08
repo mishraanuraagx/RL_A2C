@@ -1,3 +1,5 @@
+![image](https://github.com/mishraanuraagx/RL_A2C/assets/gym_animation.gif)
+
 # RL_A2C
 Actor Critic RL implementation. (gym - Cartpole-v1)
 

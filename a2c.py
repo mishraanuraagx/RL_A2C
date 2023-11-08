@@ -6,8 +6,9 @@ from torch.distributions import Categorical
 import gymnasium as gym
 from time import time, sleep
 import numpy as np
+import matplotlib.pyplot as plt
 
-from utils import episode_reward_plot, TIMESTAMP
+from utils import episode_reward_plot, TIMESTAMP, save_frames_as_gif
 # from vpg import compute_returns
 from vpg import compute_returns, ActorNetwork
 
@@ -288,10 +289,11 @@ if __name__ == '__main__':
     env_id = "CartPole-v1"
     use_gae = True
     _env = None
-    learn: bool = True
+    learn: bool = False
     if learn:
         _env = gym.make(env_id)
     else:
+        # _env = gym.make(env_id, render_mode="rgb_array")
         _env = gym.make(env_id, render_mode="human")
 
     obs, _ = _env.reset()
@@ -323,15 +325,21 @@ if __name__ == '__main__':
         counter = 0
         terminated = False
         truncated = False
-        while counter < 500:
+        frames = []
+        while counter < 100:
             action = AC.predict(obs)
             obs_, reward, terminated, truncated, info = _env.step(action)
             counter = counter+1
             sleep(0.01)
             _env.render()
+            # frames.append(_env.render())
             if terminated:
                 print('terminated')
                 _env.reset()
                 # break
+
+        print(frames[0].shape)
+        # to save a gif of all the frames
+        # save_frames_as_gif(frames)
 
     input("Press Enter to end...")
