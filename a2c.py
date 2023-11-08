@@ -288,7 +288,7 @@ if __name__ == '__main__':
     env_id = "CartPole-v1"
     use_gae = True
     _env = None
-    learn: bool = False
+    learn: bool = True
     if learn:
         _env = gym.make(env_id)
     else:
@@ -304,21 +304,21 @@ if __name__ == '__main__':
         AC.learn(120000)
 
         print('saving the models')
-        torch.save(AC.actor_net.state_dict(), "savepoint/actor_state_"+TIMESTAMP)
-        torch.save(AC.critic_net.state_dict(), "savepoint/critic_state_"+TIMESTAMP)
+        torch.save(AC.actor_net.state_dict(), "savepoint/a2c/actor_state_"+TIMESTAMP)
+        torch.save(AC.critic_net.state_dict(), "savepoint/a2c/critic_state_"+TIMESTAMP)
 
         print('saving optims')
-        torch.save(AC.optim_actor.state_dict(), "savepoint/actor_optim_"+TIMESTAMP)
-        torch.save(AC.optim_critic.state_dict(), "savepoint/critic_optim_"+TIMESTAMP)
+        torch.save(AC.optim_actor.state_dict(), "savepoint/a2c/actor_optim_"+TIMESTAMP)
+        torch.save(AC.optim_critic.state_dict(), "savepoint/a2c/critic_optim_"+TIMESTAMP)
 
     else:
         # Load previous model
-        load_timestamp: str = "1699446476"
+        load_timestamp: str = "1699447808"
         print("loading saved models")
-        AC.actor_net.load_state_dict(torch.load("savepoint/actor_state_" + load_timestamp))
-        AC.critic_net.load_state_dict(torch.load("savepoint/critic_state_" + load_timestamp))
-        AC.optim_actor.load_state_dict(torch.load("savepoint/actor_optim_" + load_timestamp))
-        AC.optim_critic.load_state_dict(torch.load("savepoint/critic_optim_" + load_timestamp))
+        AC.actor_net.load_state_dict(torch.load("savepoint/a2c/actor_state_" + load_timestamp))
+        AC.critic_net.load_state_dict(torch.load("savepoint/a2c/critic_state_" + load_timestamp))
+        AC.optim_actor.load_state_dict(torch.load("savepoint/a2c/actor_optim_" + load_timestamp))
+        AC.optim_critic.load_state_dict(torch.load("savepoint/a2c/critic_optim_" + load_timestamp))
 
         counter = 0
         terminated = False
